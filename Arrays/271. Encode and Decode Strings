@@ -1,0 +1,29 @@
+class Solution {
+public:
+
+    string encode(vector<string>& strs) {
+        string str = "";
+        for(auto it : strs){
+            for(int j = 0; j<it.size(); j++){
+                str+=it[j];
+            }
+        str+=(char)0xFFFFFF;
+        }
+        return str;
+    }
+
+    vector<string> decode(string s) {
+        vector<string>str;
+        string temp = "";
+        for(auto it : s){
+            if(it == (char)0xFFFFFF){
+                str.push_back(temp);
+                temp = "";
+            }
+            else{
+                temp+=it;
+            }
+        }
+        return str;
+    }
+};
