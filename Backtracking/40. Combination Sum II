@@ -1,0 +1,31 @@
+class Solution {
+public:
+
+    void dfs(vector<int>& nums, vector<vector<int>>& ans, vector<int>subset,int target,int start){
+        if(target==0){
+            ans.push_back(subset);
+            return;
+        }
+        for(int i = start; i<nums.size(); i++){
+            if(i>start && nums[i]==nums[i-1]){
+                continue;
+            }
+            if(nums[i]>target){
+                break;
+            }
+            subset.push_back(nums[i]);
+            dfs(nums, ans, subset, target-nums[i],i+1);
+            subset.pop_back();
+        }
+    }
+    
+    vector<vector<int>> combinationSum2(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        vector<int>subset;
+        vector<vector<int>>ans;
+        int start = 0;
+        dfs(nums, ans, subset, target, start);
+        return ans;
+        
+    }
+};
