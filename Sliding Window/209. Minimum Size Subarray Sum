@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int n = nums.size();
+        int l = 0;
+        int mini = INT_MAX;
+        int temp = 0;
+        for(int r = 0; r<n; r++){
+            temp+=nums[r];
+            while(temp>=target){
+                mini = min(r-l+1, mini);
+                temp-=nums[l];
+                l++;
+            }
+        }
+        if(mini == INT_MAX) return 0;
+        return mini;
+    }
+};

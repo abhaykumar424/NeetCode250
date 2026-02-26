@@ -1,0 +1,39 @@
+class Solution {
+public:
+    vector<int>temp1 = vector<int>(26, 0);
+    vector<int>temp2 = vector<int>(26, 0);
+
+    bool issame(){
+        for(int i=0; i<26; i++){
+            if(temp1[i]!=temp2[i]) return false;
+        }
+        return true;
+    }
+    bool checkInclusion(string s1, string s2) {
+        int m = s1.size();
+        int n = s2.size();
+
+        if(m>n) return false;
+
+        for(int i=0; i<m; i++){
+            temp1[s1[i]-'a']++;
+            temp2[s2[i]-'a']++;
+        }
+        
+        if(issame()){
+            return true;
+        }
+        
+
+        for(int i = m; i<n; i++){
+
+            temp2[s2[i-m]-'a']--;
+            temp2[s2[i]-'a']++;
+
+            if(issame()){
+                return true;
+            }
+        }
+        return false;
+    }
+};
